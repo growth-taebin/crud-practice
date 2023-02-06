@@ -5,14 +5,14 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
   jpa:
-    generate-ddl: 'true'
+    generate-ddl: true
     properties:
       hibernate:
-        format_sql: 'true'
-        show_sql: 'true'
+        format_sql: true
+        show_sql: true
     hibernate:
       ddl-auto: update
-    show-sql: 'true'
+    show-sql: true
 logging:
   level:
     org:
