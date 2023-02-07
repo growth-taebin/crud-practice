@@ -1,5 +1,6 @@
 package com.example.lamyeon.service
 
+import com.example.lamyeon.dto.BoardFormDto
 import com.example.lamyeon.entity.Board
 import com.example.lamyeon.repository.BoardRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -11,7 +12,7 @@ class BoardService @Autowired constructor(
 ) {
 
     fun write(boardFormDto: BoardFormDto): Long? {
-        return boardRepository.save(Board(boardFormDto.writer, boardFormDto.password, boardFormDto.title, boardFormDto.content)).id
+        return boardRepository.save(Board(id = -1 ,boardFormDto.writer, boardFormDto.password, boardFormDto.title, boardFormDto.content)).id
     }
 
     fun getPost(id: Long): Board? {
@@ -23,7 +24,7 @@ class BoardService @Autowired constructor(
     }
 
     fun updatePost(id: Long, boardFormDto: BoardFormDto): Board {
-        val post = boardRepository.findById(id)
+        val post = boardRepository.findById(id).get()
         post.updatePost(boardFormDto)
         return post
     }

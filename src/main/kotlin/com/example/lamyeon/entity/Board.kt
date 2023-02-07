@@ -1,5 +1,6 @@
 package com.example.lamyeon.entity
 
+import com.example.lamyeon.dto.BoardFormDto
 import org.springframework.beans.factory.annotation.Autowired
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
