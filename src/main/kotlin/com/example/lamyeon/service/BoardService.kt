@@ -1,8 +1,10 @@
 package com.example.lamyeon.service
 
 import com.example.lamyeon.dto.BoardFormDto
-import com.example.lamyeon.dto.BoardResponseDto
+import com.example.lamyeon.response.BoardResponseDto
+import com.example.lamyeon.entity.Board
 import com.example.lamyeon.repository.BoardRepository
+import com.example.lamyeon.response.BoardListResponseDto
 import org.springframework.stereotype.Service
 
 @Service
@@ -10,13 +12,13 @@ class BoardService(val boardRepository: BoardRepository) {
 
     fun write(boardFormDto: BoardFormDto): Long? {
         return boardRepository.save(
-                BoardResponseDto(id = -1, boardFormDto.writer, boardFormDto.password, boardFormDto.title, boardFormDto.content)
+                Board(id = -1, boardFormDto.writer, boardFormDto.password, boardFormDto.title, boardFormDto.content)
         ).id
     }
 
     fun findPostById(id: Long): BoardResponseDto =
             boardRepository.findById(id).get()
-                    .let { return it }
+                    .let { return BoardResponseDto(it.id, it.writer, it.title, it.password, it.content ) }
 
     fun deletePostById(id: Long) {
         boardRepository.deleteById(id)
@@ -28,6 +30,7 @@ class BoardService(val boardRepository: BoardRepository) {
     }
 
 
-    fun findAllPost(): List<BoardResponseDto> =
+    fun findAllPost(): BoardListResponseDto =
             boardRepository.findAll()
+                    .let { return BoardListResponseDto(it) }
 }

@@ -1,4 +1,4 @@
-package com.example.lamyeon.dto
+package com.example.lamyeon.response
 
 
 data class BoardResponseDto(
