@@ -2,7 +2,6 @@ package com.example.lamyeon.controller
 
 import com.example.lamyeon.dto.BoardFormDto
 import com.example.lamyeon.dto.ResponseDto
-import com.example.lamyeon.entity.Board
 import com.example.lamyeon.service.BoardService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

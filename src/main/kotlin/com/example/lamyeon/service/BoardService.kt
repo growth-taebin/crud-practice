@@ -2,11 +2,7 @@ package com.example.lamyeon.service
 
 import com.example.lamyeon.dto.BoardFormDto
 import com.example.lamyeon.dto.ResponseDto
-import com.example.lamyeon.entity.Board
 import com.example.lamyeon.repository.BoardRepository
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.jpa.domain.AbstractPersistable_.id
-import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
