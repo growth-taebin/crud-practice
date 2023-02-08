@@ -10,39 +10,27 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
-class BoardService(
-        val boardRepository: BoardRepository,
-) {
+class BoardService(val boardRepository: BoardRepository) {
 
-    fun write(
-            boardFormDto: BoardFormDto
-    ): Long? {
+    fun write(boardFormDto: BoardFormDto): Long? {
         return boardRepository.save(
                 ResponseDto(id = -1, boardFormDto.writer, boardFormDto.password, boardFormDto.title, boardFormDto.content)
         ).id
     }
 
-    fun getPost(
-            id: Long
-    ): ResponseDto =
+    fun findPostById(id: Long): ResponseDto =
             boardRepository.findById(id).get()
                     .let { return it }
 
-    fun deletePost(
-            id: Long
-    ) {
+    fun deletePostById(id: Long) {
         boardRepository.deleteById(id)
     }
 
-    fun updatePost(
-            id: Long,
-            boardFormDto: BoardFormDto
-    ): ResponseDto =
+    fun updatePostById(id: Long, boardFormDto: BoardFormDto): ResponseDto =
             boardRepository.findById(id).get()
-                    .let { updatePost(id, boardFormDto) }
+                    .let { updatePostById(id, boardFormDto) }
                     .let { return it  }
 
-    fun getPostList(): List<ResponseDto> {
-        return boardRepository.findAll()
-    }
+    fun findAllPost(): List<ResponseDto> =
+            boardRepository.findAll()
 }
