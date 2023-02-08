@@ -1,40 +1,52 @@
 package com.example.lamyeon.controller
 
 import com.example.lamyeon.dto.BoardFormDto
+import com.example.lamyeon.dto.ResponseDto
+import com.example.lamyeon.entity.Board
 import com.example.lamyeon.service.BoardService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("board")
-class BoardController constructor(private val boardService: BoardService){
+class BoardController(
+        private val boardService: BoardService
+) {
 
     @PostMapping
-    fun addPost(@RequestBody boardFormDto: BoardFormDto): ResponseEntity<Any> = boardService.write(boardFormDto)
-            .let { ResponseEntity.status(HttpStatus.CREATED).build() }
+    fun addPost(
+            @RequestBody boardFormDto: BoardFormDto
+    ): ResponseEntity<Any> =
+            boardService.write(boardFormDto)
+                    .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
     @GetMapping("/{id}")
-    fun getPost(@PathVariable id: Long): ResponseEntity<Any> = boardService.getPost(id)
-            .let { ResponseEntity.ok().body(it) }
+    fun findPostById(
+            @PathVariable id: Long
+    ): ResponseEntity<Any> =
+            boardService.findPostById(id)
+                    .let { ResponseEntity.ok().build() }
 
     @DeleteMapping("/{id}")
-    fun deletePost(@PathVariable id: Long): ResponseEntity<Any> = boardService.deletePost(id)
-            .let { ResponseEntity.ok().body(it) }
+    fun deletePostById(
+            @PathVariable id: Long
+    ): ResponseEntity<Any> =
+            boardService.deletePostById(id)
+                    .let { ResponseEntity.ok().build() }
 
     @PatchMapping("/{id}")
-    fun updatePost(
+    fun updatePostById(
             @PathVariable id: Long,
-            boardFormDto: BoardFormDto
-    ): ResponseEntity<Any> = boardService.updatePost(id, boardFormDto)
-            .let { ResponseEntity.ok().body(it) }
+            @RequestBody boardFormDto: BoardFormDto
+    ): ResponseEntity<Any> =
+            boardService.updatePostById(id, boardFormDto)
+                    .let { ResponseEntity.ok(it) }
 
     @GetMapping("/list")
-    fun listPost(): ResponseEntity<Any> = boardService.getPostList()
-            .let { ResponseEntity.ok().body(it) }
-
-
+    fun findAllPost(): ResponseEntity<List<ResponseDto>> =
+            boardService.findAllPost()
+                    .let { ResponseEntity.ok(it) }
 
 
 }
