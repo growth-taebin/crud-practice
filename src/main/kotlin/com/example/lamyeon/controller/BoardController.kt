@@ -1,7 +1,7 @@
 package com.example.lamyeon.controller
 
 import com.example.lamyeon.dto.BoardFormDto
-import com.example.lamyeon.dto.ResponseDto
+import com.example.lamyeon.dto.BoardResponseDto
 import com.example.lamyeon.service.BoardService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -43,7 +43,7 @@ class BoardController(
                     .let { ResponseEntity.ok(it) }
 
     @GetMapping("/list")
-    fun findAllPost(): ResponseEntity<List<ResponseDto>> =
+    fun findAllPost(): ResponseEntity<List<BoardResponseDto>> =
             boardService.findAllPost()
                     .let { ResponseEntity.ok(it) }
 

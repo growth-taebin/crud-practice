@@ -1,7 +1,7 @@
 package com.example.lamyeon.dto
 
 
-data class ResponseDto(
+data class BoardResponseDto(
         var id: Long?,
         var writer: String,
         var password: String,

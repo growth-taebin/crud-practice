@@ -10,7 +10,7 @@ import javax.persistence.Id
 class Board(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long?,
+        var id: Long? = null,
         var writer: String,
         var password: String,
         var title: String,
