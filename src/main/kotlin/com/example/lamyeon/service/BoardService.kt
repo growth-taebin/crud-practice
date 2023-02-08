@@ -6,6 +6,7 @@ import com.example.lamyeon.entity.Board
 import com.example.lamyeon.repository.BoardRepository
 import com.example.lamyeon.response.BoardListResponseDto
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class BoardService(val boardRepository: BoardRepository) {
@@ -24,6 +25,7 @@ class BoardService(val boardRepository: BoardRepository) {
         boardRepository.deleteById(id)
     }
 
+    @Transactional(rollbackFor = [Exception::class])
     fun updatePostById(id: Long, boardFormDto: BoardFormDto) {
         val post = boardRepository.findBoardById(id) ?: throw RuntimeException()
         post.updatePost(boardFormDto)
